@@ -1,70 +1,83 @@
-public class ConexionBD {
+public class Conexion {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("Se encontro el driver para oracle DB - la libreria necesaria esta referenciada");
+		try { 
 			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			System.out.println("Se encontró el Driver para Oracle DB - La librería está referenciada");
 			System.out.println("------------------------------------------------------------------------------------");
 			
-			Connection connection = null;
 			
-			try {
-				connection =DriverManager.getConnection(
-						"jdbc:oracle:thin:@localhost:1521:xe",
-						"JAVA",
-						"JAVA");
-						
-				System.out.println("Conexión con BD creada");
-				System.out.println("------------------------------------------------------------------------------------");
+			} catch (ClassNotFoundException e) {
+			
+			System.out.println("No tienes el driver en tu build-patch?");
+			e.printStackTrace();
+			return;
+			}
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		Connection connection = null;
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+		
+		try {
 				
-				String consulta = "SELECT * FROM PERSONAS";
+			connection = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe",
+					"JAVA",					
+					"JAVA");
 				
-				try {
-					Statement sentencia =   connection.createStatement();
-					ResultSet personaRS = sentencia.executeQuery(consulta);
+			System.out.println("Conexión creada con éxito, es posible acceder a la base de datos");
+				
+			System.out.println("------------------------------------------------------------------------------------");
+				
+		} catch (SQLException e) {
+				
+			System.out.println("No logramos instanciar una conexión");
+			e.printStackTrace();
+			return;
+		}
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				
+		String consulta = "SELECT * FROM ROLES";
+		
+		try {
+			Statement sentencia = connection.createStatement(); 
+			ResultSet rolesRS = sentencia.executeQuery(consulta);
+			
+			while (rolesRS.next()) {
+				
+				System.out.println(
+						"  NOMBRE " 	+ 	rolesRS.getString("NOMBRE")); 	
+				
+			}
+			
+		}catch(SQLException e) {
 					
-					/*while(personaRS.next()) {
-						
-						System.out.println(personaRS.getString("DOCUMENTO"));
-						System.out.println(personaRS.getString("APELLIDO1"));
-						System.out.println(personaRS.getString("NOMBRE1"));
-						System.out.println("------------------------------------------------------------------------------------");
-					}*/
-				}catch (SQLException e) {
-					System.out.println("*******************************************");
-					System.out.println("Error al ejecutar la consulta -->"+consulta);
-					System.out.println("*************************************************");
-					e.printStackTrace();
-					return;
-				}
-				
-				/*System.out.println("------------------------------------------------------------------------------------");
-				System.out.println("AQUI CONTINUA LA EJECUCCION , sino");
-				System.out.println("------------------------------------------------------------------------------------");
-				*/
-				try {
-					connection.close();
-					System.out.println("Conección cerrada");
-				
-				}catch (SQLException e) {
-					System.out.println("Error al cerrar conexión");
-					e.printStackTrace();
-					return;
-				}
-				System.out.println("------------------------------------------------------------------------------------");
-				
-			}catch(SQLException e) {
-				System.out.println("No se pudo crear la conexión");
-				e.printStackTrace();
-				return;
-			}
-			
-			}catch (ClassNotFoundException e) {
-				System.out.println("No tienes el driver en tu build-path?");
-				e.printStackTrace();
-				return;
-			}
-}
+			System.out.println("....................................................................................");				
+			System.out.println("Error al ejecutar la consulta -> " + consulta);
+			System.out.println("....................................................................................");				
+			e.printStackTrace();
+			return;
+		}
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		System.out.println("------------------------------------------------------------------------------------");
+
+		try {
+			connection.close();
+			System.out.println("Conexión cerrada con éxito");
+					
+		}catch (SQLException e) {
+			System.out.println("Error al cerrar conexión");
+			e.printStackTrace();
+			return;
+		}
+	}
 }
