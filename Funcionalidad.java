@@ -8,10 +8,7 @@ public class Funcionalidad {
 	private String descripcionFuncion;
 	private LinkedList <Rol> roles = new LinkedList<>();
 
-	public Funcionalidad(String nombreFuncion, String descripcionFuncion, LinkedList<Rol> roles) {
-		super();
-		this.nombreFuncion = nombreFuncion;
-		this.descripcionFuncion = descripcionFuncion;
+	public Funcionalidad() {
 	}
 
 	public String getNombreFuncion() {
