@@ -1,13 +1,47 @@
 package Modelo;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.LinkedList;
+
+import Controlador.ConexionBD;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		
-		Persona p1 = new Persona();
+		Connection connection = ConexionBD.getConnection();
+		
+		String consulta = "SELECT * FROM PERSONAS";
+		
+		try {
+			
+			Statement sentencia = connection.createStatement();
+			ResultSet personasRS = sentencia.executeQuery(consulta);
+			
+			while(personasRS.next()) {
+				System.out.println("Documento:");
+				System.out.println(personasRS.getString("DOCUMENTO"));
+				System.out.println("Primer apellido:");
+				System.out.println(personasRS.getString("APELLIDO1"));
+				System.out.println("Segundo apellido:");
+				System.out.println(personasRS.getString("APELLIDO2"));
+				System.out.println("Primer nombre:");
+				System.out.println(personasRS.getString("NOMBRE1"));
+				System.out.println("Segundo apellido:");
+				System.out.println(personasRS.getString("NOMBRE2"));
+				System.out.println("*****************************");
+			}
+		}catch (SQLException e) {
+			
+			System.out.println("Error al ejecutar la consulta " + consulta);
+			e.printStackTrace();
+			return;
+		
+		/*Persona p1 = new Persona();
 		p1.setDocumento("59638521");
 		p1.setApellido1("Arrillaga");
 		p1.setApellido2("Etchenique");
@@ -40,7 +74,8 @@ public class Principal {
 		LinkedList<Funcionalidad> funciones = new LinkedList<Funcionalidad>();
 		funciones.add(f1);
 		
-		r1.setFunciones(funciones);
+		r1.setFunciones(funciones);*/
 	}
 
+}
 }
