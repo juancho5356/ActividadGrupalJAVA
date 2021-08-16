@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 import Controlador.ConexionBD;
+import Controlador.DAOPersona;
 
 public class Principal {
 
@@ -15,7 +16,19 @@ public class Principal {
 		
 		Connection connection = ConexionBD.getConnection();
 		
-		String consulta = "SELECT * FROM PERSONAS";
+		int contador = DAOPersona.cuentaPersonas();
+		
+		if(contador > 0) {
+			System.out.println("En la tabla PERSONAS hay " + contador + " registros");
+		
+		}else {
+			System.out.println("La tabla PERSONAS  no contiene registros");
+			
+		}
+		
+//////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/*String consulta = "SELECT * FROM PERSONAS";
 		
 		try {
 			
@@ -40,6 +53,9 @@ public class Principal {
 			System.out.println("Error al ejecutar la consulta " + consulta);
 			e.printStackTrace();
 			return;
+		}*/
+		
+///////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/*Persona p1 = new Persona();
 		p1.setDocumento("59638521");
@@ -75,7 +91,6 @@ public class Principal {
 		funciones.add(f1);
 		
 		r1.setFunciones(funciones);*/
-	}
 
 }
 }
