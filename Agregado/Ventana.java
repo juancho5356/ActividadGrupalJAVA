@@ -87,13 +87,13 @@ public class Ventana {
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!(textCedula.getText().isEmpty() || textNombre.getText().isEmpty() || textApellido.getText().isEmpty())) {
 				String ci=textCedula.getText();
 				String nombre=textNombre.getText();
 				String apellido=textApellido.getText();
 				Empleado e1 = new Empleado(ci,nombre,apellido);
-				DAOEmpleados.delete(e1);
-				if(DAOEmpleados.delete(e1)) {
-					JOptionPane.showMessageDialog(null, "Se ha eliminado el registro");
+				DAOEmpleados.delete(e1); 
+				JOptionPane.showMessageDialog(null, "Se ha eliminado el registro");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
@@ -116,7 +116,6 @@ public class Ventana {
 				}catch(Exception x){
 					JOptionPane.showMessageDialog(null, "No existe registro compatible con la búsqueda");
 				}
-					
 				}
 		});
 		btnBuscar.setBounds(254, 128, 89, 23);
