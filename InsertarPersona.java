@@ -15,9 +15,11 @@ import javax.swing.SwingConstants;
 
 import Controlador.DAOPersona;
 import Modelo.Persona;
+import Modelo.Rol;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class InsertarPersona {
 
@@ -27,6 +29,8 @@ public class InsertarPersona {
 	private JTextField textFieldApellido2;
 	private JTextField textFieldNombre1;
 	private JTextField textFieldNombre2;
+	private JTextField textFieldEmail;
+	private JTextField textFieldContraseña;
 
 	/**
 	 * Launch the application.
@@ -56,8 +60,8 @@ public class InsertarPersona {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 682, 531);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 682, 618);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Ingresar persona");
@@ -93,38 +97,75 @@ public class InsertarPersona {
 		
 		textFieldDocumento = new JTextField();
 		textFieldDocumento.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textFieldDocumento.setBounds(157, 90, 298, 34);
+		textFieldDocumento.setBounds(157, 90, 456, 34);
 		frame.getContentPane().add(textFieldDocumento);
 		textFieldDocumento.setColumns(10);
 		
 		textFieldApellido1 = new JTextField();
 		textFieldApellido1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldApellido1.setColumns(10);
-		textFieldApellido1.setBounds(157, 138, 298, 34);
+		textFieldApellido1.setBounds(157, 138, 456, 34);
 		frame.getContentPane().add(textFieldApellido1);
 		
 		textFieldApellido2 = new JTextField();
 		textFieldApellido2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldApellido2.setColumns(10);
-		textFieldApellido2.setBounds(157, 189, 298, 34);
+		textFieldApellido2.setBounds(157, 189, 456, 34);
 		frame.getContentPane().add(textFieldApellido2);
 		
 		textFieldNombre1 = new JTextField();
 		textFieldNombre1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldNombre1.setColumns(10);
-		textFieldNombre1.setBounds(157, 237, 298, 34);
+		textFieldNombre1.setBounds(157, 237, 456, 34);
 		frame.getContentPane().add(textFieldNombre1);
 		
 		textFieldNombre2 = new JTextField();
 		textFieldNombre2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textFieldNombre2.setColumns(10);
-		textFieldNombre2.setBounds(157, 286, 298, 34);
+		textFieldNombre2.setBounds(157, 286, 456, 34);
 		frame.getContentPane().add(textFieldNombre2);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAceptar.setBounds(231, 367, 139, 40);
+		btnAceptar.setBounds(226, 531, 139, 40);
 		frame.getContentPane().add(btnAceptar);
+		
+		JLabel lblNewLabel_1_4_1 = new JLabel("Email:");
+		lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_4_1.setBounds(10, 337, 114, 25);
+		frame.getContentPane().add(lblNewLabel_1_4_1);
+		
+		JLabel lblNewLabel_1_4_2 = new JLabel("Contrase\u00F1a:");
+		lblNewLabel_1_4_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_4_2.setBounds(10, 385, 114, 25);
+		frame.getContentPane().add(lblNewLabel_1_4_2);
+		
+		JLabel lblNewLabel_1_4_3 = new JLabel("Rol:");
+		lblNewLabel_1_4_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_4_3.setBounds(10, 430, 114, 25);
+		frame.getContentPane().add(lblNewLabel_1_4_3);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(157, 333, 456, 34);
+		frame.getContentPane().add(textFieldEmail);
+		
+		textFieldContraseña = new JTextField();
+		textFieldContraseña.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textFieldContraseña.setColumns(10);
+		textFieldContraseña.setBounds(157, 381, 456, 34);
+		frame.getContentPane().add(textFieldContraseña);
+		
+		JComboBox comboBoxRol = new JComboBox();
+		comboBoxRol.setMaximumRowCount(3);
+		comboBoxRol.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBoxRol.setBounds(157, 429, 456, 34);
+		comboBoxRol.addItem("Administrador");
+		comboBoxRol.addItem("Jefe de seccion");
+		comboBoxRol.addItem("Operador de seccion");
+		frame.getContentPane().add(comboBoxRol);
+		
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String documento = textFieldDocumento.getText();
@@ -132,6 +173,9 @@ public class InsertarPersona {
 				String apellido2 = textFieldApellido2.getText();
 				String nombre1 = textFieldNombre1.getText();
 				String nombre2 = textFieldNombre2.getText();
+				String email = textFieldEmail.getText();
+				String contraseña = textFieldContraseña.getText();
+				String rol = comboBoxRol.getToolTipText();
 				
 				Persona p = new Persona();
 				p.setDocumento(documento);
@@ -139,6 +183,9 @@ public class InsertarPersona {
 				p.setApellido2(apellido2);
 				p.setNombre1(nombre1);
 				p.setNombre2(nombre2);
+				p.setEmail(email);
+				p.setClave(contraseña);
+				//p.setRol();
 				
 				if(DAOPersona.insert(p)) {
 					JOptionPane.showMessageDialog(null, "Se ha insertado una persona en la base de datos");
@@ -146,13 +193,13 @@ public class InsertarPersona {
 					
 					if(contador > 0) {
 						System.out.println("En la tabla PERSONAS hay " + contador + " registros");
-						LinkedList<String> personas = null;
+						LinkedList<Persona> personas = null;
 						personas = DAOPersona.findAll();
-						for(String s: personas)
+						for(Persona s: personas)
 							System.out.println(s);
 					}
 				}else {
-					JOptionPane.showInputDialog(null, "No se ha insertado una persona en la base de datos");
+					JOptionPane.showMessageDialog(null, "No se ha insertado una persona en la base de datos");
 				}
 			}
 	});

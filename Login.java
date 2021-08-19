@@ -9,8 +9,17 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.LinkedList;
 
 import javax.swing.SwingConstants;
+
+import Controlador.DAOPersona;
+import Modelo.Funcionalidad;
+import Modelo.Persona;
+import Modelo.Principal;
+import Modelo.Rol;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -98,9 +107,27 @@ public class Login {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((textFieldCorreo.getText().equals(correoAdmin)) && (passwordField.getText().equals(contraseñaAdmin))) {
+				LinkedList<Persona> administradores = new LinkedList<>();
+				administradores = DAOPersona.findAdmin();
+				
+				LinkedList<String> correos = new LinkedList<>();
+				for(Persona p: administradores) {
+					correos.add(p.getEmail());
+				}
+				
+				LinkedList<String> claves = new LinkedList<>();
+				for(Persona s: administradores) {
+					claves.add(s.getClave());
+				}
+				
+				if((correos.contains(textFieldCorreo.getText()) && (claves.contains(passwordField.getText())))) {
 				JOptionPane.showMessageDialog(null, "Usuario aceptado");
 				System.out.println("Usuario aceptado");
+				for(Persona p: administradores) {
+					System.out.println(p);
+				}
+				MenuAdministrador.main(null);
+				
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
