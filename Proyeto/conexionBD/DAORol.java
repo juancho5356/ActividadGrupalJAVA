@@ -18,6 +18,8 @@ public class DAORol {
 	
 	private static final String BUSCAR_ROL = "SELECT * FROM ROLES WHERE NOMBRE=?";
 	
+	private static final String BUSCAR_ROL_ID = "SELECT * FROM ROLES WHERE ID_ROL=?";
+	
 	private static final String UPDATE_ROL = "UPDATE ROLES SET NOMBRE=?, DESCRIPCION=? WHERE ID_ROL=?";
 	
 	private static final String DELETE_ROL = "DELETE FROM ROLES WHERE ID_ROL=?"; 
@@ -113,6 +115,28 @@ public class DAORol {
 		}
 
 	}
+	public static Rol findRolID(int id ) {
+		
+		try {
+			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(BUSCAR_ROL_ID);
+			
+			statement.setLong(1, id);
+			
+			ResultSet resultado = statement.executeQuery();
+			
+			Rol rol = null;
+			
+			while(resultado.next()) {
+				rol = getRolFromResultSet(resultado);
+			}
+			return rol;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 	public static int cuentaRoles() {
 		
 		int cuenta = 0;
@@ -135,9 +159,6 @@ public class DAORol {
 	}
 	
 	
-	
-
-	
 private static Rol getRolFromResultSet(ResultSet resultado) throws SQLException {
 	
 	int id = resultado.getInt("ID_ROL");		
@@ -154,3 +175,4 @@ private static Rol getRolFromResultSet(ResultSet resultado) throws SQLException 
 	
 	}
 }
+
