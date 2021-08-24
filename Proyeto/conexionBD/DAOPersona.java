@@ -186,3 +186,5 @@ private static Persona getPersonaFromResultSet(ResultSet resultado) throws SQLEx
 
 }
 
+
+
