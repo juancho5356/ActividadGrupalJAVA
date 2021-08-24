@@ -24,8 +24,11 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.awt.event.MouseEvent;
 
-public class Funcionalidades{
+public class Funcionalidades implements MouseListener{
 
 	JFrame frame;
 	private JPanel panel;
@@ -87,6 +90,7 @@ public class Funcionalidades{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 811, 511);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -104,6 +108,7 @@ public class Funcionalidades{
 		panel.add(lblCantidadDeFuncionalidades);
 		
 		table = new JTable();
+		table.addMouseListener(this);
 		scrollPane.setViewportView(table);
 		
 		lista();
@@ -132,7 +137,7 @@ public class Funcionalidades{
 					
 					if (DAOFuncionalidad.delete(idF)) {
 						
-						JOptionPane.showMessageDialog(null, "Éxito");
+						JOptionPane.showMessageDialog(null, "Ã‰xito");
 						
 						textEliminar.setText("");
 						lista();
@@ -182,7 +187,7 @@ public class Funcionalidades{
 					
 					DAOFuncionalidad.insert(f);
 					
-					JOptionPane.showMessageDialog(null, "Éxito");
+					JOptionPane.showMessageDialog(null, "Ã‰xito");
 					
 					lista();
 					cuenta();
@@ -191,7 +196,7 @@ public class Funcionalidades{
 					textArea_Desc.setText("");
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "No es posible añadir el registro, campos sin rellenar");
+					JOptionPane.showMessageDialog(null, "No es posible aÃ±adir el registro, campos sin rellenar");
 				}
 			}
 		});
@@ -258,7 +263,7 @@ public class Funcionalidades{
 						
 					
 						if(DAOFuncionalidad.edit(f)){
-							JOptionPane.showMessageDialog(null, "Éxito");
+							JOptionPane.showMessageDialog(null, "Ã‰xito");
 							lista();
 							cuenta();
 						}
@@ -318,7 +323,7 @@ public class Funcionalidades{
 	public void lista() {
 		
 		DefaultTableModel model = new DefaultTableModel();
-		Object[] columns = {"Id Funcionalidad", "Nombre", "Descripción"};
+		Object[] columns = {"Id Funcionalidad", "Nombre", "DescripciÃ³n"};
 		
 		model.setColumnIdentifiers(columns);
 		
@@ -354,4 +359,34 @@ public class Funcionalidades{
 		
 	}
 	
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	public void mouseClickedTable(MouseEvent e) {
+		int filaSeleccionada;
+		try {
+			filaSeleccionada = table.getSelectedRow();
+			if(filaSeleccionada == -1) {
+
+			}else {
+			
+				textIdF.setText(table.getValueAt(filaSeleccionada, 0 ).toString());
+				textArea_Nombre_1.setText(table.getValueAt(filaSeleccionada, 1 ).toString());
+				textArea_Desc_1.setText(table.getValueAt(filaSeleccionada, 2 ).toString());
+				
+			}
+		}catch(Exception ex) {
+			 JOptionPane.showMessageDialog(null, " .::Error En la Operacion::.");
+		}
+	}
 }
