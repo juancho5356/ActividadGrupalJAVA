@@ -23,8 +23,11 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.awt.event.MouseEvent;
 
-public class Roles {
+public class Roles implements MouseListener {
 
 	
 	/**
@@ -90,6 +93,7 @@ public class Roles {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 811, 511);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -103,6 +107,7 @@ public class Roles {
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(this);
 		scrollPane.setViewportView(table);
 		
 		lista();
@@ -135,7 +140,7 @@ public class Roles {
 					
 					if (DAORol.delete(idRol)) {
 						
-						JOptionPane.showMessageDialog(null, "Éxito");
+						JOptionPane.showMessageDialog(null, "Ã‰xito");
 						
 						textEliminar.setText("");
 						lista();
@@ -193,7 +198,7 @@ public class Roles {
 					
 					DAORol.insert(r);
 					
-					JOptionPane.showMessageDialog(null, "Éxito");
+					JOptionPane.showMessageDialog(null, "Ã‰xito");
 					
 					lista();
 					cuenta();
@@ -202,7 +207,7 @@ public class Roles {
 					textArea_Desc.setText("");
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "No es posible añadir el registro, campos sin rellenar");
+					JOptionPane.showMessageDialog(null, "No es posible aÃ±adir el registro, campos sin rellenar");
 				}
 			}
 		});
@@ -272,7 +277,7 @@ public class Roles {
 						r.setDescripcionRol(d);
 					
 						if(DAORol.edit(r)){
-							JOptionPane.showMessageDialog(null, "Éxito");
+							JOptionPane.showMessageDialog(null, "Ã‰xito");
 							lista();
 							cuenta();
 						}
@@ -323,7 +328,7 @@ public class Roles {
 	}
 	public void lista() {
 		DefaultTableModel model = new DefaultTableModel();
-		Object[] columns = {"Id Rol", "Nombre", "Descripción"};
+		Object[] columns = {"Id Rol", "Nombre", "DescripciÃ³n"};
 		
 		model.setColumnIdentifiers(columns);
 		
@@ -358,4 +363,34 @@ public class Roles {
 		textCantidad.setText(""+ cuenta + "");
 	}
 
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	public void mouseClickedTable(MouseEvent e) {
+		int filaSeleccionada;
+		try {
+			filaSeleccionada = table.getSelectedRow();
+			if(filaSeleccionada == -1) {
+
+			}else {
+			
+				textId.setText(table.getValueAt(filaSeleccionada, 0 ).toString());
+				textArea_Nombre_1.setText(table.getValueAt(filaSeleccionada, 1 ).toString());
+				textArea_Desc_1.setText(table.getValueAt(filaSeleccionada, 2 ).toString());
+				
+			}
+		}catch(Exception ex) {
+			 JOptionPane.showMessageDialog(null, " .::Error En la Operacion::.");
+		}
+	}
 }
