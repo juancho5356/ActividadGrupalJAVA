@@ -19,7 +19,7 @@ public class DAOPersona {
 	
 	private static final String BUSCAR_PERSONA = "SELECT * FROM PERSONAS WHERE APELLIDO1=? AND NOMBRE1=?";
 	
-	private static final String UPDATE_PERSONA = "UPDATE PERSONAS SET DOCUMENTO=?, APELLIDO1=?, APELLIDO2=?, NOMBRE1=?, NOMBRE2=? FECHA_NAC=?, MAIL=?, CLAVE=?, ID_ROL=(SELECT ID_ROL FROM ROLES WHERE NOMBRE = ?) WHERE ID_PERSONA=?";
+	private static final String UPDATE_PERSONA = "UPDATE PERSONAS SET DOCUMENTO=?, APELLIDO1=?, APELLIDO2=?, NOMBRE1=?, NOMBRE2=?, FECHA_NAC=?, ID_ROL=? WHERE ID_PERSONA=?";
 	
 	private static final String DELETE_PERSONA = "DELETE FROM PERSONAS WHERE ID_PERSONA=?"; 
 	
@@ -42,6 +42,7 @@ public class DAOPersona {
 			statement.setString(8, p.getClave());
 			statement.setLong(9, p.getRol().getIdRol());
 			
+			
 			int Retorno = statement.executeUpdate();
 			
 			return Retorno > 0;
@@ -63,8 +64,8 @@ public class DAOPersona {
 			statement.setString(4, p.getNombre1());
 			statement.setString(5, p.getNombre2());
 			statement.setDate(6, java.sql.Date.valueOf(p.getFechaNac()));
-			statement.setString(7, p.getMail());
-			statement.setString(8, p.getClave());
+			statement.setLong(7, p.getRol().getIdRol());
+			statement.setLong(8, p.getIdPersona());
 			
 			int Retorno = statement.executeUpdate();
 			
