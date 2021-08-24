@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import java.awt.EventQueue;
 
@@ -14,10 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.LinkedList;
-import modelo.Persona;
-import modelo.Rol;
-import conexionBD.DAOPersona;
-import conexionBD.DAORol;
+import Modelo.Persona;
+import Modelo.Rol;
+import Controlador.DAOPersona;
+import Controlador.DAORol;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,11 +28,8 @@ import javax.swing.JComboBox;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
-public class Listado implements MouseListener {
+public class Listado {
 
 	JFrame frame;
 	private JPanel panel;
@@ -75,7 +72,6 @@ public class Listado implements MouseListener {
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
-	private JButton btnLimpiar;
 
 	/**
 	 * Launch the application.
@@ -119,9 +115,6 @@ public class Listado implements MouseListener {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setSurrendersFocusOnKeystroke(true);
-		table.addMouseListener(this);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
 		listaP();
@@ -153,7 +146,7 @@ public class Listado implements MouseListener {
 					
 					if (DAOPersona.delete(idRol)) {
 						
-						JOptionPane.showMessageDialog(null, "Ã‰xito");
+						JOptionPane.showMessageDialog(null, "Éxito");
 						
 						textEliminar.setText("");
 						listaP();
@@ -300,10 +293,42 @@ public class Listado implements MouseListener {
 		textId.setBounds(139, 67, 60, 19);
 		panel_1.add(textId);
 
+		
+		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBackground(SystemColor.menu);
 		btnAceptar.setBounds(245, 396, 97, 21);
 		panel_1.add(btnAceptar);
+		
+		lblCamposObligatorios = new JLabel("Campos obligatorios *");
+		lblCamposObligatorios.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCamposObligatorios.setForeground(Color.GRAY);
+		lblCamposObligatorios.setBounds(187, 67, 155, 19);
+		panel_1.add(lblCamposObligatorios);
+		
+		lblNewLabel_3 = new JLabel("*");
+		lblNewLabel_3.setBounds(9, 70, 15, 13);
+		panel_1.add(lblNewLabel_3);
+		
+		lblNewLabel_4 = new JLabel("*");
+		lblNewLabel_4.setBounds(9, 107, 15, 13);
+		panel_1.add(lblNewLabel_4);
+		
+		lblNewLabel_5 = new JLabel("*");
+		lblNewLabel_5.setBounds(9, 145, 15, 13);
+		panel_1.add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("*");
+		lblNewLabel_6.setBounds(9, 222, 15, 13);
+		panel_1.add(lblNewLabel_6);
+		
+		lblNewLabel_7 = new JLabel("*");
+		lblNewLabel_7.setBounds(9, 303, 15, 13);
+		panel_1.add(lblNewLabel_7);
+		
+		lblNewLabel_8 = new JLabel("*");
+		lblNewLabel_8.setBounds(9, 347, 15, 13);
+		panel_1.add(lblNewLabel_8);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
 				if(!(textDocumento.getText().isEmpty() || textApellido1.getText().isEmpty() || textNombre1.getText().isEmpty() || textDia.getText().isEmpty() 
@@ -342,8 +367,8 @@ public class Listado implements MouseListener {
 								p.setFechaNac(fecNac);
 								p.setRol(rol);
 								
-								if(DAOPersona.edit(p)) {
-									JOptionPane.showMessageDialog(null, "Ã‰xito");
+								if(DAOPersona.edit(p, textId.getText())) {
+									JOptionPane.showMessageDialog(null, "Éxito");
 									listaP();
 									cuenta();
 								}
@@ -365,56 +390,6 @@ public class Listado implements MouseListener {
 			
 		});
 		
-		lblCamposObligatorios = new JLabel("Campos obligatorios *");
-		lblCamposObligatorios.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCamposObligatorios.setForeground(Color.GRAY);
-		lblCamposObligatorios.setBounds(187, 67, 155, 19);
-		panel_1.add(lblCamposObligatorios);
-		
-		lblNewLabel_3 = new JLabel("*");
-		lblNewLabel_3.setBounds(9, 70, 15, 13);
-		panel_1.add(lblNewLabel_3);
-		
-		lblNewLabel_4 = new JLabel("*");
-		lblNewLabel_4.setBounds(9, 107, 15, 13);
-		panel_1.add(lblNewLabel_4);
-		
-		lblNewLabel_5 = new JLabel("*");
-		lblNewLabel_5.setBounds(9, 145, 15, 13);
-		panel_1.add(lblNewLabel_5);
-		
-		lblNewLabel_6 = new JLabel("*");
-		lblNewLabel_6.setBounds(9, 222, 15, 13);
-		panel_1.add(lblNewLabel_6);
-		
-		lblNewLabel_7 = new JLabel("*");
-		lblNewLabel_7.setBounds(9, 303, 15, 13);
-		panel_1.add(lblNewLabel_7);
-		
-		lblNewLabel_8 = new JLabel("*");
-		lblNewLabel_8.setBounds(9, 347, 15, 13);
-		panel_1.add(lblNewLabel_8);
-		
-		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBackground(SystemColor.menu);
-		btnLimpiar.setBounds(9, 396, 97, 21);
-		panel_1.add(btnLimpiar);
-		
-		btnLimpiar.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent e) {
-				textId.setText("");
-				textDocumento.setText("");
-				textApellido1.setText("");
-				textApellido2.setText("");
-				textNombre1.setText("");
-				textNombre2.setText("");
-				textDia.setText("");
-				textMes.setText("");
-				textAnio.setText("");
-			}
-		});
-		
-		
 		lblListado = new JLabel("Listado Personas");
 		lblListado.setFont(new Font("Bookman Old Style", Font.BOLD, 40));
 		lblListado.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -424,13 +399,11 @@ public class Listado implements MouseListener {
 		frame.setBounds(100, 100, 1262, 464);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	
-		
-		
 		}
 	
 	public void listaP() {
 		DefaultTableModel model = new DefaultTableModel();
-		Object[] columns = {"Id Persona","Documento", "Apellido1", "Apellido2", "Nombre1", "Nombre2", "Fecha Nacimiento", "Correo ElectrÃ³nico"};
+		Object[] columns = {"Id Persona","Documento", "Apellido1", "Apellido2", "Nombre1", "Nombre2", "Fecha Nacimiento", "Correo Electrónico"};
 		
 		model.setColumnIdentifiers(columns);
 		
@@ -441,7 +414,7 @@ public class Listado implements MouseListener {
 		
 		for (int i=0;i<allPersona.size();i++){
 			
-			int id=allPersona.get(i).getIdPersona();
+			int id = allPersona.get(i).getIdPersona();
 			String doc = allPersona.get(i).getDocumento();
 			String a1 = allPersona.get(i).getApellido1();
 			String a2 = allPersona.get(i).getApellido2();
@@ -458,11 +431,8 @@ public class Listado implements MouseListener {
 			fila[5] = n2;
 			fila[6] = fn;
 			fila[7] = c;
-			model.addRow(fila); 
-			
+			model.addRow(fila);
 		}
-		
-		
 		
 	}
 	public void cuenta() {
@@ -475,52 +445,5 @@ public class Listado implements MouseListener {
 		int cuenta = DAOPersona.cuentaPersonas();
 		textCantidad.setText(""+ cuenta +"");
 		
-	}
-	
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == table) {
-			mouseClickedTable(e);
-		}
-	}
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	public void mousePressed(MouseEvent e) {
-	}
-	public void mouseReleased(MouseEvent e) {
-	}
-	public void mouseClickedTable(MouseEvent e) {
-		int filaSeleccionada;
-		try {
-			filaSeleccionada = table.getSelectedRow();
-			if(filaSeleccionada == -1) {
-
-			}else {
-			
-				LocalDate fn = (LocalDate) table.getValueAt(filaSeleccionada, 6);
-				
-				int dia = fn.getDayOfMonth();
-				String d = String.valueOf(dia);
-				int mes = fn.getMonthValue();
-				String m = String.valueOf(mes);
-				int anio = fn.getYear();
-				String a = String.valueOf(anio);
-				
-				textId.setText(table.getValueAt(filaSeleccionada, 0 ).toString());
-				textDocumento.setText(table.getValueAt(filaSeleccionada, 1 ).toString());
-				textApellido1.setText(table.getValueAt(filaSeleccionada, 2 ).toString());
-				textApellido2.setText(table.getValueAt(filaSeleccionada, 3 ).toString());
-				textNombre1.setText(table.getValueAt(filaSeleccionada, 4 ).toString());
-				textNombre2.setText(table.getValueAt(filaSeleccionada, 5 ).toString());
-				textDia.setText(d);
-				textMes.setText(m);
-				textAnio.setText(a);
-			
-				
-			}
-		}catch(Exception ex) {
-			 JOptionPane.showMessageDialog(null, " .::Error En la Operacion::.");
-		}
 	}
 }
