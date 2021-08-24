@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class Roles implements MouseListener {
 
@@ -64,6 +65,7 @@ public class Roles implements MouseListener {
 	private JScrollPane scrollPane_4;
 	private JTextArea textArea_Desc;
 	private JLabel lblRol;
+	private JLabel lblSelect;
 
 	/**
 	 * Launch the application.
@@ -323,6 +325,12 @@ public class Roles implements MouseListener {
 		lblRol.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		lblRol.setBounds(10, 10, 535, 42);
 		panel.add(lblRol);
+		
+		lblSelect = new JLabel("Seleccione un registro para realizar alguna modificaci\u00F3n");
+		lblSelect.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSelect.setForeground(Color.DARK_GRAY);
+		lblSelect.setBounds(390, 10, 397, 19);
+		panel.add(lblSelect);
 		
 		
 	}
