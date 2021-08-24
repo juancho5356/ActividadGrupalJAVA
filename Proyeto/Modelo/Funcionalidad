@@ -1,0 +1,60 @@
+package modelo;
+
+import java.util.*;
+
+public class Funcionalidad {
+	private int idFuncionalidad;
+	private String nombreFuncion;
+	private String descripcionFuncion;
+	private LinkedList <Rol> roles = new LinkedList<>();
+
+	public Funcionalidad() {
+	}
+
+	public Funcionalidad( String nombreFuncion, String descripcionFuncion, LinkedList<Rol> roles) {
+		this.nombreFuncion = nombreFuncion;
+		this.descripcionFuncion = descripcionFuncion;
+		this.roles = roles;
+	}
+
+	public int getIdFuncionalidad() {
+		return idFuncionalidad;
+	}
+
+	public void setIdFuncionalidad(int idFuncionalidad) {
+		this.idFuncionalidad = idFuncionalidad;
+	}
+
+	public void setDescripcionFuncion(String descripcionFuncion) {
+		this.descripcionFuncion = descripcionFuncion;
+	}
+
+	public String getNombreFuncion() {
+		return nombreFuncion;
+	}
+
+	public void setNombreFuncion(String nombreFuncion) {
+		this.nombreFuncion = nombreFuncion;
+	}
+
+	public String getDescripcionFuncion() {
+		return descripcionFuncion;
+	}
+
+	public void setDescripci�nFuncion(String descripcionFuncion) {
+		this.descripcionFuncion = descripcionFuncion;
+	}
+
+	
+	public LinkedList<Rol> getRoles() {
+		return roles;
+	}
+
+	
+	public void setRoles(LinkedList<Rol> roles) {
+		this.roles = roles;
+	}
+	
+	
+
+}
