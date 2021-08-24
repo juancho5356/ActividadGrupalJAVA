@@ -1,0 +1,145 @@
+package vista;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.SwingConstants;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
+import java.awt.Window;
+
+public class LogIn extends JFrame implements ActionListener {
+
+	private JFrame frmLogin;
+	private JPasswordField Contrasenia;
+	private JTextField text_Correo;
+	private JLabel Label_Correo;
+	private JLabel Label_Contrasenia;
+	private JButton Button_Cancelar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LogIn window = new LogIn();
+					window.frmLogin.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public LogIn() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmLogin = new JFrame();
+		frmLogin.setTitle("LogIn");
+		frmLogin.getContentPane().setBackground(SystemColor.menu);
+		frmLogin.getContentPane().setForeground(UIManager.getColor("InternalFrame.resizeIconHighlight"));
+		frmLogin.setBounds(100, 100, 637, 557);
+		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmLogin.getContentPane().setLayout(null);
+		
+		JLabel Label_IngresoSesion = new JLabel("Ingreso de Sesi\u00F3n");
+		Label_IngresoSesion.setFont(new Font("Baskerville Old Face", Font.PLAIN, 40));
+		Label_IngresoSesion.setHorizontalAlignment(SwingConstants.CENTER);
+		Label_IngresoSesion.setBackground(Color.WHITE);
+		Label_IngresoSesion.setBounds(91, 84, 432, 64);
+		frmLogin.getContentPane().add(Label_IngresoSesion);
+		
+		Contrasenia = new JPasswordField();
+		Contrasenia.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+		Contrasenia.setBounds(168, 293, 279, 32);
+		frmLogin.getContentPane().add(Contrasenia);
+		
+		JButton Button_Aceptar = new JButton("Aceptar");
+		Button_Aceptar.setBackground(SystemColor.controlHighlight);
+		Button_Aceptar.setFont(new Font("Baskerville Old Face", Font.PLAIN, 16));
+		Button_Aceptar.setBounds(168, 370, 119, 29);
+		frmLogin.getContentPane().add(Button_Aceptar);
+		
+		text_Correo = new JTextField();
+		text_Correo.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+		text_Correo.setBounds(168, 193, 279, 32);
+		frmLogin.getContentPane().add(text_Correo);
+		text_Correo.setColumns(10);
+		
+		Label_Correo = new JLabel("Correo electr\u00F3nico");
+		Label_Correo.setFont(new Font("Baskerville Old Face", Font.PLAIN, 18));
+		Label_Correo.setBounds(168, 158, 157, 37);
+		frmLogin.getContentPane().add(Label_Correo);
+		
+		Label_Contrasenia = new JLabel("Contrase\u00F1a");
+		Label_Contrasenia.setFont(new Font("Baskerville Old Face", Font.PLAIN, 18));
+		Label_Contrasenia.setBounds(168, 258, 104, 37);
+		frmLogin.getContentPane().add(Label_Contrasenia);
+		
+		Button_Cancelar = new JButton("Cancelar");
+		Button_Cancelar.setBackground(SystemColor.controlHighlight);
+		Button_Cancelar.addActionListener(this);
+		Button_Cancelar.setFont(new Font("Baskerville Old Face", Font.PLAIN, 16));
+		Button_Cancelar.setBounds(328, 370, 119, 29);
+		frmLogin.getContentPane().add(Button_Cancelar);
+		
+		String correoAdmin = "admin@correo.com";
+		String contraseñaAdmin = "admin";
+		
+		Button_Aceptar.addActionListener(new ActionListener() {
+		
+
+			public void actionPerformed(ActionEvent e) {
+				if(!(text_Correo.getText().isEmpty() || Contrasenia.getText().isEmpty())) {
+					if((text_Correo.getText().equals(correoAdmin)) && (Contrasenia.getText().equals(contraseñaAdmin))) {
+						JOptionPane.showMessageDialog(null, "Ingreso Exitoso");
+						
+						frmLogin.dispose();
+						
+						text_Correo.setText("");
+						Contrasenia.setText("");
+						
+						MenuAdmin window = new MenuAdmin();
+						window.frame.setVisible(true);
+						
+						
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Correo y/o contraseña incorrectos");
+						}
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese su Correo y contraseña");
+				}
+				
+		
+			}
+	});	
+}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == Button_Cancelar) {
+			actionPerformedButton_Cancelar(e);
+		}
+	}
+	protected static void actionPerformedButton_Cancelar(ActionEvent e) {
+		System.exit(0);
+	}
+}
