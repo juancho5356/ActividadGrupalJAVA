@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class Funcionalidades implements MouseListener{
 
@@ -61,6 +62,7 @@ public class Funcionalidades implements MouseListener{
 	private JScrollPane scrollPane_4;
 	private JTextArea textArea_Desc_1;
 	private JLabel lblFuncionalidad;
+	private JLabel lblSelect;
 
 	/**
 	 * Launch the application.
@@ -318,6 +320,12 @@ public class Funcionalidades implements MouseListener{
 		lblFuncionalidad.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		lblFuncionalidad.setBounds(10, 12, 535, 42);
 		panel.add(lblFuncionalidad);
+		
+		lblSelect = new JLabel("Seleccione un registro para realizar alguna modificaci\u00F3n");
+		lblSelect.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSelect.setForeground(Color.DARK_GRAY);
+		lblSelect.setBounds(390, 10, 397, 19);
+		panel.add(lblSelect);
 	}
 	
 	public void lista() {
