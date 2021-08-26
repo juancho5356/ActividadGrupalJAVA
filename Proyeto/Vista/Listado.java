@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import java.awt.EventQueue;
 
@@ -14,10 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.LinkedList;
-import modelo.Persona;
-import modelo.Rol;
-import conexionBD.DAOPersona;
-import conexionBD.DAORol;
+import Modelo.Persona;
+import Modelo.Rol;
+import Controlador.DAOPersona;
+import Controlador.DAORol;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,12 +28,8 @@ import javax.swing.JComboBox;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import javax.swing.JPasswordField;
 
-public class Listado implements MouseListener {
+public class Listado {
 
 	JFrame frame;
 	private JPanel panel;
@@ -76,14 +72,6 @@ public class Listado implements MouseListener {
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
-	private JButton btnLimpiar;
-	private JLabel lblCorreo;
-	private JTextField textCorreo;
-	private JPasswordField password;
-	private JLabel lblClave;
-	private JLabel lblNewLabel_9;
-	private JLabel lblNewLabel_10;
-	private JLabel lblSelect;
 
 	/**
 	 * Launch the application.
@@ -113,46 +101,42 @@ public class Listado implements MouseListener {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(175, 238, 238));
 		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 1431, 506);
+		panel.setBounds(0, 0, 1248, 427);
 		panel.setLayout(null);
 		panel.setBackground(SystemColor.activeCaption);
 		frame.getContentPane().add(panel);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 69, 1053, 389);
+		scrollPane.setBounds(10, 69, 860, 288);
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setSurrendersFocusOnKeystroke(true);
-		table.addMouseListener(this);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
 		listaP();
 		cuenta();
 		
 		lblNewLabel = new JLabel("Cantidad de personas registradas:");
-		lblNewLabel.setBounds(602, 468, 220, 21);
+		lblNewLabel.setBounds(602, 367, 220, 21);
 		panel.add(lblNewLabel);
 		
 		textEliminar = new JTextField();
 		textEliminar.setColumns(10);
 		textEliminar.setBackground(Color.WHITE);
-		textEliminar.setBounds(220, 468, 58, 21);
+		textEliminar.setBounds(220, 367, 58, 21);
 		panel.add(textEliminar);
 		
 		lblEliminar = new JLabel("Ingrese ID de persona para eliminar:");
-		lblEliminar.setBounds(10, 468, 211, 21);
+		lblEliminar.setBounds(10, 367, 211, 21);
 		panel.add(lblEliminar);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setBackground(SystemColor.menu);
-		btnConfirmar.setBounds(295, 468, 97, 21);
+		btnConfirmar.setBounds(295, 367, 97, 21);
 		panel.add(btnConfirmar);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -162,7 +146,7 @@ public class Listado implements MouseListener {
 					
 					if (DAOPersona.delete(idRol)) {
 						
-						JOptionPane.showMessageDialog(null, "√âxito");
+						JOptionPane.showMessageDialog(null, "…xito");
 						
 						textEliminar.setText("");
 						listaP();
@@ -182,7 +166,7 @@ public class Listado implements MouseListener {
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(245, 245, 245));
 		panel_1.setLayout(null);
-		panel_1.setBounds(1073, 0, 359, 496);
+		panel_1.setBounds(879, 0, 369, 427);
 		panel.add(panel_1);
 		
 		lblDocumento = new JLabel("Documento");
@@ -231,11 +215,11 @@ public class Listado implements MouseListener {
 		panel_1.add(lblFechaNacimiento);
 		
 		lblRol = new JLabel("Rol");
-		lblRol.setBounds(24, 426, 67, 13);
+		lblRol.setBounds(24, 347, 67, 13);
 		panel_1.add(lblRol);
 		
 		comboRol = new JComboBox<Object>();
-		comboRol.setBounds(139, 422, 203, 21);
+		comboRol.setBounds(139, 343, 203, 21);
 		panel_1.add(comboRol);
 		
 		LinkedList<Rol> allRoles = DAORol.findAll();
@@ -309,75 +293,12 @@ public class Listado implements MouseListener {
 		textId.setBounds(139, 67, 60, 19);
 		panel_1.add(textId);
 
+		
+		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBackground(SystemColor.menu);
-		btnAceptar.setBounds(245, 465, 97, 21);
+		btnAceptar.setBounds(245, 396, 97, 21);
 		panel_1.add(btnAceptar);
-		btnAceptar.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed (ActionEvent e) {
-				if(!(textDocumento.getText().isEmpty() || textApellido1.getText().isEmpty() || textNombre1.getText().isEmpty() || textDia.getText().isEmpty() 
-				  || textMes.getText().isEmpty() || textAnio.getText().isEmpty() || textCorreo.getText().isEmpty() || password.getText().isEmpty())) {
-							
-							String id = textId.getText();
-							int idP = Integer.parseInt(id);
-							
-							String doc = textDocumento.getText();
-							String a1 = textApellido1.getText();
-							String a2 = textApellido2.getText();
-							String n1 = textNombre1.getText();
-							String n2 = textNombre2.getText();
-							
-							String correo = textCorreo.getText();
-							String clave = password.getText();
-							
-							String d = textDia.getText();
-							int day = Integer.parseInt(d);
-							String m = textMes.getText();
-							int month = Integer.parseInt(m);
-							String an = textAnio.getText(); 
-							int year = Integer.parseInt(an);
-							
-							LocalDate fecNac = LocalDate.of(year, month, day);
-							
-							String r = (String) comboRol.getSelectedItem();
-							Rol rol = DAORol.findRol(r);
-							
-							try {
-								Persona p = new Persona();
-								p.setIdPersona(idP);
-								p.setDocumento(doc);
-								p.setApellido1(a1);
-								p.setApellido2(a2);
-								p.setNombre1(n1);
-								p.setNombre2(n2);
-								p.setMail(correo);
-								p.setClave(clave);
-								p.setFechaNac(fecNac);
-								p.setRol(rol);
-								
-								if(DAOPersona.edit(p)) {
-									JOptionPane.showMessageDialog(null, "√âxito");
-									listaP();
-									cuenta();
-								}
-								else {
-									JOptionPane.showMessageDialog(null, "El registro que acaba de ingresar, no se encuentra en el sistema");
-								}
-								
-							}catch(Exception ex) {
-								JOptionPane.showMessageDialog(null, "No es posible actualizar el registro");
-							}
-							
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "No es posible actualizar el registro, campos obligatorios sin rellenar");
-						}	
-						
-						
-					}
-			
-		});
 		
 		lblCamposObligatorios = new JLabel("Campos obligatorios *");
 		lblCamposObligatorios.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -406,79 +327,83 @@ public class Listado implements MouseListener {
 		panel_1.add(lblNewLabel_7);
 		
 		lblNewLabel_8 = new JLabel("*");
-		lblNewLabel_8.setBounds(9, 426, 15, 13);
+		lblNewLabel_8.setBounds(9, 347, 15, 13);
 		panel_1.add(lblNewLabel_8);
-		
-		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBackground(SystemColor.menu);
-		btnLimpiar.setBounds(9, 465, 97, 21);
-		panel_1.add(btnLimpiar);
-		
-		lblNewLabel_9 = new JLabel("*");
-		lblNewLabel_9.setBounds(9, 346, 15, 13);
-		panel_1.add(lblNewLabel_9);
-		
-		lblNewLabel_10 = new JLabel("*");
-		lblNewLabel_10.setBounds(9, 385, 15, 13);
-		panel_1.add(lblNewLabel_10);
-		
-		lblCorreo = new JLabel("Correo electr\u00F3nico");
-		lblCorreo.setBounds(21, 346, 111, 13);
-		panel_1.add(lblCorreo);
-		
-		lblClave = new JLabel("Contrase\u00F1a");
-		lblClave.setBounds(21, 385, 67, 13);
-		panel_1.add(lblClave);
-		
-		textCorreo = new JTextField();
-		textCorreo.setBounds(139, 343, 203, 19);
-		panel_1.add(textCorreo);
-		textCorreo.setForeground(Color.BLACK);
-		textCorreo.setColumns(10);
-		textCorreo.setBackground(Color.WHITE);
-		
-		password = new JPasswordField();
-		password.setBounds(140, 382, 202, 19);
-		panel_1.add(password);
-		
-		btnLimpiar.addActionListener(new ActionListener() {
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
-				textId.setText("");
-				textDocumento.setText("");
-				textApellido1.setText("");
-				textApellido2.setText("");
-				textNombre1.setText("");
-				textNombre2.setText("");
-				textDia.setText("");
-				textMes.setText("");
-				textAnio.setText("");
-				textCorreo.setText("");
-				password.setText("");
-			}
+				if(!(textDocumento.getText().isEmpty() || textApellido1.getText().isEmpty() || textNombre1.getText().isEmpty() || textDia.getText().isEmpty() 
+				  || textMes.getText().isEmpty() || textAnio.getText().isEmpty())) {
+							
+							String id = textId.getText();
+							int idP = Integer.parseInt(id);
+							
+							String doc = textDocumento.getText();
+							String a1 = textApellido1.getText();
+							String a2 = textApellido2.getText();
+							String n1 = textNombre1.getText();
+							String n2 = textNombre2.getText();
+							
+							
+							String d = textDia.getText();
+							int day = Integer.parseInt(d);
+							String m = textMes.getText();
+							int month = Integer.parseInt(m);
+							String an = textAnio.getText(); 
+							int year = Integer.parseInt(an);
+							
+							LocalDate fecNac = LocalDate.of(year, month, day);
+							
+							String r = (String) comboRol.getSelectedItem();
+							Rol rol = DAORol.findRol(r);
+							
+							try {
+								Persona p = new Persona();
+								p.setIdPersona(idP);
+								p.setDocumento(doc);
+								p.setApellido1(a1);
+								p.setApellido2(a2);
+								p.setNombre1(n1);
+								p.setNombre2(n2);
+								p.setFechaNac(fecNac);
+								p.setRol(rol);
+								
+								if(DAOPersona.edit(p, textId.getText())) {
+									JOptionPane.showMessageDialog(null, "…xito");
+									listaP();
+									cuenta();
+								}
+								else {
+									JOptionPane.showMessageDialog(null, "El registro que acaba de ingresar, no se encuentra en el sistema");
+								}
+								
+							}catch(Exception ex) {
+								JOptionPane.showMessageDialog(null, "No es posible actualizar el registro");
+							}
+							
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "No es posible actualizar el registro, campos obligatorios sin rellenar");
+						}	
+						
+						
+					}
+			
 		});
-		
 		
 		lblListado = new JLabel("Listado Personas");
 		lblListado.setFont(new Font("Bookman Old Style", Font.BOLD, 40));
 		lblListado.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		lblListado.setBounds(10, 10, 496, 42);
+		lblListado.setBounds(10, 10, 535, 42);
 		panel.add(lblListado);
-		
-		lblSelect = new JLabel("Seleccione un registro para realizar alguna modificaci\u00F3n");
-		lblSelect.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblSelect.setForeground(Color.DARK_GRAY);
-		lblSelect.setBounds(666, 35, 397, 19);
-		panel.add(lblSelect);
 		frame.setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 1445, 532);
+		frame.setBounds(100, 100, 1262, 464);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	
-		
 		}
 	
 	public void listaP() {
 		DefaultTableModel model = new DefaultTableModel();
-		Object[] columns = {"Id Persona","Documento", "Apellido1", "Apellido2", "Nombre1", "Nombre2", "Fecha Nacimiento", "Correo Electr√≥nico", "Contrase√±a", "Rol"};
+		Object[] columns = {"Id Persona","Documento", "Apellido1", "Apellido2", "Nombre1", "Nombre2", "Fecha Nacimiento", "Correo ElectrÛnico"};
 		
 		model.setColumnIdentifiers(columns);
 		
@@ -489,7 +414,7 @@ public class Listado implements MouseListener {
 		
 		for (int i=0;i<allPersona.size();i++){
 			
-			int id=allPersona.get(i).getIdPersona();
+			int id = allPersona.get(i).getIdPersona();
 			String doc = allPersona.get(i).getDocumento();
 			String a1 = allPersona.get(i).getApellido1();
 			String a2 = allPersona.get(i).getApellido2();
@@ -497,8 +422,6 @@ public class Listado implements MouseListener {
 			String n2 = allPersona.get(i).getNombre2();
 			LocalDate fn = allPersona.get(i).getFechaNac();
 			String c = allPersona.get(i).getMail();
-			String cont = allPersona.get(i).getClave();
-			String r = allPersona.get(i).getRol().getNombreRol();
 			
 			fila[0] = id;
 			fila[1] = doc;
@@ -508,74 +431,19 @@ public class Listado implements MouseListener {
 			fila[5] = n2;
 			fila[6] = fn;
 			fila[7] = c;
-			fila[8] = cont;
-			fila[9] = r;
-			model.addRow(fila); 
-			
+			model.addRow(fila);
 		}
-		
-		
 		
 	}
 	public void cuenta() {
 		textCantidad = new JTextPane();
 		textCantidad.setEditable(false);
 		textCantidad.setBackground(SystemColor.inactiveCaptionBorder);
-		textCantidad.setBounds(812, 468, 58, 21);
+		textCantidad.setBounds(812, 367, 58, 21);
 		panel.add(textCantidad);
 		
 		int cuenta = DAOPersona.cuentaPersonas();
 		textCantidad.setText(""+ cuenta +"");
 		
 	}
-	
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == table) {
-			mouseClickedTable(e);
-		}
-	}
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	public void mousePressed(MouseEvent e) {
-	}
-	public void mouseReleased(MouseEvent e) {
-	}
-	public void mouseClickedTable(MouseEvent e) {
-		int filaSeleccionada;
-		try {
-			filaSeleccionada = table.getSelectedRow();
-			if(filaSeleccionada == -1) {
-
-			}else {
-			
-				LocalDate fn = (LocalDate) table.getValueAt(filaSeleccionada, 6);
-				
-				int dia = fn.getDayOfMonth();
-				String d = String.valueOf(dia);
-				int mes = fn.getMonthValue();
-				String m = String.valueOf(mes);
-				int anio = fn.getYear();
-				String a = String.valueOf(anio);
-				
-				textId.setText(table.getValueAt(filaSeleccionada, 0 ).toString());
-				textDocumento.setText(table.getValueAt(filaSeleccionada, 1 ).toString());
-				textApellido1.setText(table.getValueAt(filaSeleccionada, 2 ).toString());
-				textApellido2.setText(table.getValueAt(filaSeleccionada, 3 ).toString());
-				textNombre1.setText(table.getValueAt(filaSeleccionada, 4 ).toString());
-				textNombre2.setText(table.getValueAt(filaSeleccionada, 5 ).toString());
-				textDia.setText(d);
-				textMes.setText(m);
-				textAnio.setText(a);
-				textCorreo.setText(table.getValueAt(filaSeleccionada, 7).toString());
-				password.setText(table.getValueAt(filaSeleccionada, 8).toString());
-				comboRol.setPopupVisible(true);
-
-			}
-		}catch(Exception ex) {
-			 JOptionPane.showMessageDialog(null, " .::Error En la Operacion::.");
-		}
-	}
 }
-

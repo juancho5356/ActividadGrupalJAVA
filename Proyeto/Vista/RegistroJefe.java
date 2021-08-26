@@ -27,7 +27,7 @@ import Modelo.Rol;
 
 import javax.swing.JPasswordField;
 
-public class Registro {
+public class RegistroJefe {
 
 	JFrame frame;
 	private JPanel panel_Registro;
@@ -74,7 +74,7 @@ public class Registro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Registro window = new Registro();
+					RegistroJefe window = new RegistroJefe();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -86,7 +86,7 @@ public class Registro {
 	/**
 	 * Create the application.
 	 */
-	public Registro() {
+	public RegistroJefe() {
 		initialize();
 	}
 
@@ -330,7 +330,7 @@ public class Registro {
 		panel_Registro.add(btnIr);
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Listado window = new Listado();
+				ListadoJefe window = new ListadoJefe();
 				window.frame.setVisible(true);
 			}
 		});

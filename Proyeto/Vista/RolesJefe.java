@@ -24,7 +24,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Roles {
+public class RolesJefe {
 
 	
 	/**
@@ -36,26 +36,12 @@ public class Roles {
 	private JTable table;
 	private JTextPane textCantidad;
 	private JLabel lblCantidadDeRoles;
-	private JLabel lblIngreseIdDe;
-	private JTextField textEliminar;
-	private JButton btnConfirmar;
 	private JTabbedPane tabbedPane;
 	private JPanel panel_1;
-	private JPanel panel_2;
 	private JLabel lblIngreso;
 	private JLabel lblNombre;
 	private JLabel lblNewLabel;
 	private JButton btnAceptar;
-	private JLabel lblActualizar;
-	private JLabel lblNewLabel_1;
-	private JTextField textId;
-	private JLabel lblNombre_1;
-	private JLabel lblNewLabel_2;
-	private JButton btnAceptar_1;
-	private JScrollPane scrollPane_1;
-	private JTextArea textArea_Nombre_1;
-	private JScrollPane scrollPane_2;
-	private JTextArea textArea_Desc_1;
 	private JScrollPane scrollPane_3;
 	private JTextArea textArea_Nombre;
 	private JScrollPane scrollPane_4;
@@ -69,7 +55,7 @@ public class Roles {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Roles window = new Roles();
+					RolesJefe window = new RolesJefe();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,7 +67,7 @@ public class Roles {
 	/*
 	 * Create the application.
 	 */
-	public Roles() {
+	public RolesJefe() {
 		initialize();
 	}
 
@@ -99,7 +85,7 @@ public class Roles {
 		panel.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 62, 535, 371);
+		scrollPane.setBounds(10, 62, 535, 402);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -111,47 +97,6 @@ public class Roles {
 		lblCantidadDeRoles = new JLabel("Cantidad de Roles:");
 		lblCantidadDeRoles.setBounds(555, 62, 220, 21);
 		panel.add(lblCantidadDeRoles);
-		
-		lblIngreseIdDe = new JLabel("Ingrese ID de Rol para eliminar:");
-		lblIngreseIdDe.setBounds(10, 443, 191, 21);
-		panel.add(lblIngreseIdDe);
-		
-		textEliminar = new JTextField();
-		textEliminar.setColumns(10);
-		textEliminar.setBackground(Color.WHITE);
-		textEliminar.setBounds(263, 443, 58, 21);
-		panel.add(textEliminar);
-		
-		btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBackground(SystemColor.menu);
-		btnConfirmar.setBounds(338, 443, 97, 21);
-		panel.add(btnConfirmar);
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent e) {
-				
-				if(!(textEliminar.getText().isEmpty())) {
-					String idX = textEliminar.getText();
-					int idRol = Integer.parseInt(idX);
-					
-					if (DAORol.delete(idRol)) {
-						
-						JOptionPane.showMessageDialog(null, "Éxito");
-						
-						textEliminar.setText("");
-						lista();
-						cuenta();
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "El registro que acaba de ingresar, no se encuentra en el sistema");
-						textEliminar.setText("");
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Por favor ingrese un id");
-				}
-				
-			}
-		});
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(555, 121, 232, 343);
@@ -222,96 +167,6 @@ public class Roles {
 		textArea_Desc = new JTextArea();
 		textArea_Desc.setLineWrap(true);
 		scrollPane_4.setViewportView(textArea_Desc);
-		
-		panel_2 = new JPanel();
-		tabbedPane.addTab("Modificar", null, panel_2, null);
-		panel_2.setLayout(null);
-		
-		lblActualizar = new JLabel("Actualizaci\u00F3n");
-		lblActualizar.setFont(new Font("Bookman Old Style", Font.BOLD, 20));
-		lblActualizar.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		lblActualizar.setBounds(11, 10, 207, 25);
-		panel_2.add(lblActualizar);
-		
-		lblNewLabel_1 = new JLabel("ID Rol");
-		lblNewLabel_1.setBounds(11, 45, 190, 21);
-		panel_2.add(lblNewLabel_1);
-		
-		textId = new JTextField();
-		textId.setColumns(10);
-		textId.setBackground(Color.WHITE);
-		textId.setBounds(159, 45, 58, 21);
-		panel_2.add(textId);
-		
-		lblNombre_1 = new JLabel("Nombre:");
-		lblNombre_1.setBounds(11, 83, 126, 13);
-		panel_2.add(lblNombre_1);
-		
-		lblNewLabel_2 = new JLabel("Descripci\u00F3n:");
-		lblNewLabel_2.setBounds(11, 157, 75, 13);
-		panel_2.add(lblNewLabel_2);
-		
-		btnAceptar_1 = new JButton("Aceptar");
-		btnAceptar_1.setBackground(SystemColor.menu);
-		btnAceptar_1.setBounds(133, 285, 85, 21);
-		panel_2.add(btnAceptar_1);
-		btnAceptar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(!(textId.getText().isEmpty() || textArea_Nombre_1.getText().isEmpty() || textArea_Desc_1.getText().isEmpty())) {
-					
-					String id = textId.getText();
-					int idR = Integer.parseInt(id);
-					String n = textArea_Nombre_1.getText();
-					String d = textArea_Desc_1.getText();
-					
-					try {
-						Rol r = new Rol();
-						r.setIdRol(idR);
-						r.setNombreRol(n);
-						r.setDescripcionRol(d);
-					
-						if(DAORol.edit(r)){
-							JOptionPane.showMessageDialog(null, "Éxito");
-							lista();
-							cuenta();
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "El registro que acaba de ingresar, no se encuentra en el sistema");
-						}
-						
-						
-					}catch(Exception ex) {
-						JOptionPane.showMessageDialog(null, "No es posible actualizar el registro");
-					}
-					lista();
-					cuenta();
-					
-					textId.setText("");
-					textArea_Nombre_1.setText("");
-					textArea_Desc_1.setText("");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "No es posible actualizar el registro, campos sin rellenar");
-				}
-			}
-		});
-		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(11, 106, 206, 39);
-		panel_2.add(scrollPane_1);
-		
-		textArea_Nombre_1 = new JTextArea();
-		textArea_Nombre_1.setLineWrap(true);
-		scrollPane_1.setViewportView(textArea_Nombre_1);
-		
-		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(11, 180, 206, 93);
-		panel_2.add(scrollPane_2);
-		
-		textArea_Desc_1 = new JTextArea();
-		textArea_Desc_1.setLineWrap(true);
-		scrollPane_2.setViewportView(textArea_Desc_1);
 		
 		lblRol = new JLabel("Roles");
 		lblRol.setFont(new Font("Bookman Old Style", Font.BOLD, 40));
