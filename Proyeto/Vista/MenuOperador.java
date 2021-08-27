@@ -92,17 +92,33 @@ public class MenuOperador {
 		btnFuncionalidades.setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
 		btnFuncionalidades.setBounds(286, 357, 265, 52);
 		frame.getContentPane().add(btnFuncionalidades);
+		
+		JLabel lblNewLabel = new JLabel("Ha iniciado sesion como Operador de seccion");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(554, 10, 277, 20);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnCerrar = new JButton("Cerrar sesion");
+		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCerrar.setBounds(679, 40, 129, 21);
+		frame.getContentPane().add(btnCerrar);
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(MenuOperador.class.getResource("/Vista/d.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 831, 467);
+		frame.getContentPane().add(lblNewLabel_1);
 		btnFuncionalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuncionalidadesOperador window = new FuncionalidadesOperador();
 				window.frame.setVisible(true);
 			}
 		});
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuOperador.class.getResource("/Vista/d.jpg")));
-		lblNewLabel.setBounds(0, 0, 841, 476);
-		frame.getContentPane().add(lblNewLabel);
 		
 		
 	}

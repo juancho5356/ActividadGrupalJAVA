@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Window;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Modelo.Funcionalidad;
 import Modelo.Rol;
@@ -24,6 +25,7 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class MenuAdmin {
 
@@ -34,6 +36,8 @@ public class MenuAdmin {
 	private JButton btnPersonas;
 	private JButton btnFuncionalidades;
 	private JLabel lblNewLabel;
+	private JButton btnCerrar;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -67,7 +71,7 @@ public class MenuAdmin {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 845, 504);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -111,17 +115,33 @@ public class MenuAdmin {
 		btnFuncionalidades.setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
 		btnFuncionalidades.setBounds(286, 357, 265, 52);
 		panel.add(btnFuncionalidades);
+		
+		lblNewLabel = new JLabel("Ha iniciado sesion como Administrador");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(598, 10, 243, 23);
+		panel.add(lblNewLabel);
+		
+		btnCerrar = new JButton("Cerrar sesion");
+		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCerrar.setBounds(690, 43, 125, 21);
+		panel.add(btnCerrar);
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(MenuAdmin.class.getResource("/Vista/d.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 841, 476);
+		panel.add(lblNewLabel_1);
 		btnFuncionalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Funcionalidades window = new Funcionalidades();
 				window.frame.setVisible(true);
 			}
 		});
-		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuAdmin.class.getResource("/Vista/d.jpg")));
-		lblNewLabel.setBounds(0, 0, 841, 476);
-		panel.add(lblNewLabel);
 		
 	
 	}

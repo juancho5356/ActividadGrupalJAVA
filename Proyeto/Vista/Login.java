@@ -26,7 +26,6 @@ public class Login {
 	private JFrame frmLogin;
 	private JPasswordField passwordField;
 	private JTextField textFieldCorreo;
-	private final JLabel lblNewLabel_2 = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -59,7 +58,7 @@ public class Login {
 		frmLogin.setTitle("LogIn");
 		frmLogin.getContentPane().setBackground(Color.GRAY);
 		frmLogin.getContentPane().setForeground(Color.WHITE);
-		frmLogin.setBounds(100, 100, 584, 429);
+		frmLogin.setBounds(100, 100, 781, 429);
 		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		
@@ -68,7 +67,7 @@ public class Login {
 		lblNewLabel_1.setFont(new Font("Baskerville Old Face", Font.PLAIN, 60));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setBounds(178, 21, 205, 71);
+		lblNewLabel_1.setBounds(274, 21, 205, 71);
 		frmLogin.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("Correo electrónico");
@@ -85,24 +84,36 @@ public class Login {
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordField.setBounds(210, 195, 271, 37);
+		passwordField.setBounds(210, 195, 489, 37);
 		frmLogin.getContentPane().add(passwordField);
-		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(237, 250, 104, 32);
-		frmLogin.getContentPane().add(btnNewButton);
 		
 		textFieldCorreo = new JTextField();
 		textFieldCorreo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textFieldCorreo.setBounds(210, 125, 271, 37);
+		textFieldCorreo.setBounds(210, 125, 489, 37);
 		frmLogin.getContentPane().add(textFieldCorreo);
 		textFieldCorreo.setColumns(10);
+		
+		JButton btnAdministrador = new JButton("Administrador");
+		btnAdministrador.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnAdministrador.setBounds(49, 266, 166, 37);
+		frmLogin.getContentPane().add(btnAdministrador);
+		
+		JButton btnJefe = new JButton("Jefe de seccion");
+		btnJefe.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnJefe.setBounds(258, 266, 190, 37);
+		frmLogin.getContentPane().add(btnJefe);
+		
+		JButton btnOperador = new JButton("Operador de seccion");
+		btnOperador.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnOperador.setBounds(498, 266, 228, 37);
+		frmLogin.getContentPane().add(btnOperador);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/Vista/d.jpg")));
-		lblNewLabel_2.setBounds(0, 0, 570, 392);
+		lblNewLabel_2.setBounds(0, 0, 767, 392);
 		frmLogin.getContentPane().add(lblNewLabel_2);
 		
-		btnNewButton.addActionListener(new ActionListener() {
+		btnAdministrador.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				LinkedList<Persona> administradores = new LinkedList<>();
@@ -121,13 +132,18 @@ public class Login {
 				if((correos.contains(textFieldCorreo.getText()) && (claves.contains(passwordField.getText())))) {
 					System.out.println("Usuario aceptado");
 					MenuAdmin.main(null);
+					textFieldCorreo.setText("");
+					passwordField.setText("");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
 				}
+			}
+		});
 				
 		
-		btnNewButton.addActionListener(new ActionListener() {
+		btnJefe.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				LinkedList<Persona> jefes = new LinkedList<>();
 				jefes = DAOPersona.findJefe();
@@ -145,13 +161,18 @@ public class Login {
 				if((correosJ.contains(textFieldCorreo.getText()) && (clavesJ.contains(passwordField.getText())))) {
 					System.out.println("Usuario aceptado");
 					MenuJefe.main(null);
+					textFieldCorreo.setText("");
+					passwordField.setText("");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
 				}
+			}
+		});
 				
 				
-		btnNewButton.addActionListener(new ActionListener() {
+		btnOperador.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				LinkedList<Persona> operadores = new LinkedList<>();
 				operadores = DAOPersona.findOperador();
@@ -169,14 +190,12 @@ public class Login {
 				if((correosO.contains(textFieldCorreo.getText()) && (clavesO.contains(passwordField.getText())))) {
 					System.out.println("Usuario aceptado");
 					MenuOperador.main(null);
+					textFieldCorreo.setText("");
+					passwordField.setText("");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
 				}
-			}
-		});
-			}
-		});
 			}
 		});
 	}

@@ -92,17 +92,33 @@ public class MenuJefe {
 		btnFuncionalidades.setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
 		btnFuncionalidades.setBounds(286, 357, 265, 52);
 		frame.getContentPane().add(btnFuncionalidades);
+		
+		JLabel lblNewLabel = new JLabel("Ha iniciado sesion como Jefe de seccion");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(573, 10, 258, 15);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnCerrar = new JButton("Cerrar sesion");
+		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCerrar.setBounds(693, 35, 115, 21);
+		frame.getContentPane().add(btnCerrar);
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(MenuJefe.class.getResource("/Vista/d.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 831, 467);
+		frame.getContentPane().add(lblNewLabel_1);
 		btnFuncionalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuncionalidadesJefe window = new FuncionalidadesJefe();
 				window.frame.setVisible(true);
 			}
 		});
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuJefe.class.getResource("/Vista/d.jpg")));
-		lblNewLabel.setBounds(0, 0, 841, 476);
-		frame.getContentPane().add(lblNewLabel);
 		
 		
 	}
