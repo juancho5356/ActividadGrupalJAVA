@@ -1,15 +1,14 @@
-package conexionBD;
+package Controlador;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
-import modelo.Rol;
+import Modelo.Rol;
 
 public class DAORol {
-	
+
 	private static String ALL_ROLES = "SELECT * FROM ROLES ORDER BY 1"; 
 
 	private static final String CUENTA_ROLES = "SELECT COUNT(ID_ROL) AS CUENTA FROM ROLES";
@@ -17,8 +16,6 @@ public class DAORol {
 	private static final String INSERT_ROL = "INSERT INTO ROLES (ID_ROL, NOMBRE, DESCRIPCION) values (SEQ_ID_ROL.nextval, ?, ?)";
 	
 	private static final String BUSCAR_ROL = "SELECT * FROM ROLES WHERE NOMBRE=?";
-	
-	private static final String BUSCAR_ROL_ID = "SELECT * FROM ROLES WHERE ID_ROL=?";
 	
 	private static final String UPDATE_ROL = "UPDATE ROLES SET NOMBRE=?, DESCRIPCION=? WHERE ID_ROL=?";
 	
@@ -115,28 +112,6 @@ public class DAORol {
 		}
 
 	}
-	public static Rol findRolID(int id ) {
-		
-		try {
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(BUSCAR_ROL_ID);
-			
-			statement.setLong(1, id);
-			
-			ResultSet resultado = statement.executeQuery();
-			
-			Rol rol = null;
-			
-			while(resultado.next()) {
-				rol = getRolFromResultSet(resultado);
-			}
-			return rol;
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-	}
 	public static int cuentaRoles() {
 		
 		int cuenta = 0;
@@ -159,6 +134,9 @@ public class DAORol {
 	}
 	
 	
+	
+
+	
 private static Rol getRolFromResultSet(ResultSet resultado) throws SQLException {
 	
 	int id = resultado.getInt("ID_ROL");		
@@ -175,4 +153,3 @@ private static Rol getRolFromResultSet(ResultSet resultado) throws SQLException 
 	
 	}
 }
-

@@ -1,16 +1,12 @@
-package conexionBD;
+package Controlador;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 
-import modelo.Funcionalidad;
-
-
+import Modelo.Funcionalidad;
 
 public class DAOFuncionalidad {
-	
+
 	private static String ALL_FUNCIONES = "SELECT * FROM FUNCIONALIDADES ORDER BY 1"; 
 
 	private static final String CUENTA_FUNCIONES = "SELECT COUNT(ID_FUNCIONALIDAD) AS CUENTA FROM FUNCIONALIDADES";
